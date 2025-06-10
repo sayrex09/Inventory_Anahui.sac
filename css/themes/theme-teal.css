@@ -1,5 +1,5 @@
 .theme-teal .navbar {
-  background-color: #009688; }
+  background-color: #ffffff; }
 
 .theme-teal .navbar-brand {
   color: #fff; }
@@ -25,13 +25,13 @@
     background-color: rgba(0, 0, 0, 0); }
 
 .theme-teal .bars {
-  color: #fff; }
+  color: #000000; }
 
 .theme-teal .sidebar .menu .list li.active {
   background-color: rgba(0, 0, 0, 0); }
   .theme-teal .sidebar .menu .list li.active > :first-child i,
   .theme-teal .sidebar .menu .list li.active > :first-child span {
-    color: #009688; }
+    color: #000000; }
 
 .theme-teal .sidebar .menu .list .toggled {
   background-color: rgba(0, 0, 0, 0); }

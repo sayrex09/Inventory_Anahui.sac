@@ -3545,8 +3545,8 @@ section.content {
   background-color: #F44336; }
 
 [type="checkbox"].filled-in:checked.chk-col-pink + label:after {
-  border: 2px solid #E91E63;
-  background-color: #E91E63; }
+  border: 2px solid #2a2f5b;
+  background-color: #019fdc; }
 
 [type="checkbox"].filled-in:checked.chk-col-purple + label:after {
   border: 2px solid #9C27B0;
