@@ -1,24 +1,24 @@
 # 📦 Sistema de Gestión de Inventarios - Anahui S.A.C.
 
-Este sistema permite controlar y gestionar eficientemente los inventarios de la empresa **Textil Anahui S.A.C.**, optimizando el seguimiento de productos, proveedores y movimientos de almacén.
+Este sistema ha sido diseñado para facilitar la gestión integral de inventarios de la empresa **Textil Anahui S.A.C.**, permitiendo un control preciso sobre productos, proveedores y movimientos de almacén en entornos de red local.
 
 ---
 
 ## 🚀 Inicio Rápido
 
-### 📋 Requisitos
+### 📋 Requisitos mínimos
 
-- PHP 7.4 o superior
-- Linux (Debian, Ubuntu, Arch, etc.)
-- Nginx instalado
-- `avahi-daemon` para resolver dominios `.local` en la red
-- Navegador web moderno (Chrome, Firefox, Brave, etc.)
+* PHP 7.4 o superior
+* Distribución Linux (Debian, Ubuntu, Arch, etc.)
+* Servidor Nginx
+* `avahi-daemon` para resolución de dominios `.local`
+* Navegador web moderno (Chrome, Firefox, Brave, etc.)
 
 ---
 
-## 📂 Instalación y configuración
+## 📂 Instalación y configuración automatizada
 
-### 1. Clonar el repositorio
+### 1. Clonar el repositorio del sistema
 
 ```bash
 git clone https://github.com/tuusuario/sistema-inventario-anahui.git
@@ -27,105 +27,54 @@ cd sistema-inventario-anahui
 
 ---
 
-### 2. Configurar el dominio local `miweb.local`
+### 2. Ejecutar el script de configuración
 
-Edita el archivo `/etc/hosts`:
+Para realizar una instalación limpia, configurar el entorno de red y poner en marcha el sistema, ejecuta el script incluido:
 
 ```bash
-sudo nano /etc/hosts
+chmod +x configurar_servidor.sh
+./configurar_servidor.sh
 ```
 
-Agrega o modifica las siguientes líneas:
+Este script realiza automáticamente:
 
-```
-127.0.0.1       localhost miweb.local
-192.168.1.10    miweb.local   # Reemplaza con tu IP local si es distinta
-127.0.1.1       miweb
-```
+* Eliminación de configuraciones previas en `/etc/hosts`, `dnsmasq` y `nginx`
+* Registro del dominio `miweb.local` apuntando a tu IP de red local
+* Instalación y configuración de `dnsmasq` para la resolución DNS en LAN
+* Activación y configuración del servicio `avahi-daemon` para compatibilidad `.local`
+* Generación del virtual host en Nginx apuntando al backend PHP
+* Inicio automático del servidor PHP en `0.0.0.0:3000`
+* Muestra un código QR para acceso rápido desde dispositivos móviles conectados a la red
 
 ---
 
-### 3. Instalar y activar Avahi
+## 🌐 Acceso al sistema
 
-Esto permite que otros dispositivos en tu red resuelvan `miweb.local`.
+Una vez configurado, puedes acceder al sistema desde cualquier dispositivo conectado a la red local mediante:
 
-```bash
-sudo apt update
-sudo apt install avahi-daemon -y
-sudo systemctl enable avahi-daemon
-sudo systemctl start avahi-daemon
-```
-
----
-
-### 4. Configurar Nginx como proxy inverso
-
-Crea un nuevo archivo de configuración:
-
-```bash
-sudo nano /etc/nginx/sites-available/miweb
-```
-
-Contenido:
-
-```nginx
-server {
-    listen 80;
-    server_name miweb.local;
-
-    location / {
-        proxy_pass http://127.0.0.1:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
-}
-```
-
-Activa el sitio:
-
-```bash
-sudo ln -s /etc/nginx/sites-available/miweb /etc/nginx/sites-enabled/
-sudo nginx -t && sudo systemctl reload nginx
-```
-
----
-
-## ▶️ Ejecutar el servidor
-
-Puedes iniciar el servidor ejecutando el script:
-
-```bash
-./iniciar-servidor.sh
-```
-
-Este script te permite elegir entre iniciar en `localhost` o en la red LAN.
-
----
-
-## 🌍 Acceder al sistema
-
-* Desde tu PC: `http://miweb.local`
-* Desde otros dispositivos conectados a la misma red: `http://miweb.local`
+* En tu PC: `http://miweb.local`
+* Desde otros dispositivos: `http://miweb.local`
 * Alternativamente (si falla Avahi): `http://<tu-ip-local>:3000`
 
+> 💡 El uso de `dnsmasq` o `avahi-daemon` elimina la necesidad de recordar IPs o puertos.
+
 ---
 
-## ✅ Verificación
+## ✅ Verificaciones recomendadas
 
-* Verifica que Avahi está activo:
+* Verificar que el servicio Avahi está activo:
 
 ```bash
 systemctl status avahi-daemon
 ```
 
-* Verifica que el backend responde:
+* Comprobar que el backend responde correctamente:
 
 ```bash
 curl http://127.0.0.1:3000
 ```
 
-* Verifica que Nginx está correctamente configurado:
+* Validar la configuración de Nginx:
 
 ```bash
 sudo nginx -t
@@ -133,14 +82,14 @@ sudo nginx -t
 
 ---
 
-## 🧰 Recursos adicionales
+## 📚 Recursos adicionales
 
-* Documentación del sistema: [en construcción]
-* Reporte técnico de implementación: [en construcción]
+* Documentación técnica del sistema: \[en construcción]
+* Reporte detallado de implementación y arquitectura: \[en construcción]
 
 ---
 
-## 🧑‍💻 Autor
+## 👨‍💻 Autoría y créditos
 
-Desarrollado por **Sayrex**  
-Proyecto académico para la empresa **Textil Anahui S.A.C.**
+Desarrollado por **Sayrex**
+Proyecto académico de implementación para la empresa **Textil Anahui S.A.C.**
