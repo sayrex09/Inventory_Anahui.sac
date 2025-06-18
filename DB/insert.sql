@@ -1,170 +1,161 @@
-USE db_inventory;
+CREATE DATABASE IF NOT EXISTS `db_inventory` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `db_inventory`;
 
--- Datos para companies
-INSERT INTO `companies` (`id`, `name`, `phone`, `address`, `created_at`, `updated_at`) VALUES
-(1, 'Textiles del Norte S.A.', '555-100-2000', 'Av. Industrial 123, Zona Textil, Ciudad', NOW(), NOW()),
-(2, 'Confecciones Andinas', '555-200-3000', 'Calle Algodón 456, Distrito Industrial', NOW(), NOW()),
-(3, 'Tejidos Premium', '555-300-4000', 'Av. Hilandería 789, Parque Industrial', NOW(), NOW()),
-(4, 'Moda Textil Export', '555-400-5000', 'Calle Exportadores 101, Zona Franca', NOW(), NOW()),
-(5, 'Telares Nacionales', '555-500-6000', 'Av. Maquinaria 202, Polígono Industrial', NOW(), NOW()),
-(6, 'Hilos y Telares S.A.', '555-600-7000', 'Calle Ovillo 303, Sector Textil', NOW(), NOW()),
-(7, 'Confecciones del Valle', '555-700-8000', 'Av. Costura 404, Parque Artesanal', NOW(), NOW()),
-(8, 'Textiles Ecológicos', '555-800-9000', 'Calle Sostenible 505, Eco Zona', NOW(), NOW()),
-(9, 'Tejidos Artesanales', '555-900-0000', 'Av. Tradición 606, Centro Cultural', NOW(), NOW()),
-(10, 'Algodones del Sur', '555-000-1000', 'Calle Fibra Natural 707, Campo Algodonero', NOW(), NOW());
-
--- Datos para branches
-INSERT INTO `branches` (`id`, `branch_name`, `created_at`, `updated_at`) VALUES
-(1, 'Fábrica Principal', NOW(), NOW()),
-(2, 'Tienda Centro', NOW(), NOW()),
-(3, 'Almacén Norte', NOW(), NOW()),
-(4, 'Taller de Confección', NOW(), NOW()),
-(5, 'Oficinas Administrativas', NOW(), NOW()),
-(6, 'Centro de Distribución', NOW(), NOW()),
-(7, 'Showroom Textil', NOW(), NOW()),
-(8, 'Planta de Teñido', NOW(), NOW()),
-(9, 'Bodega Materia Prima', NOW(), NOW()),
-(10, 'Sucursal Sur', NOW(), NOW());
-
--- Datos para roles
-INSERT INTO `roles` (`id`, `role_name`, `created_at`, `updated_at`) VALUES
-(1, 'Administrador', NOW(), NOW()),
-(2, 'Gerente de Producción', NOW(), NOW()),
-(3, 'Supervisor de Calidad', NOW(), NOW()),
-(4, 'Jefe de Almacén', NOW(), NOW()),
-(5, 'Vendedor', NOW(), NOW()),
-(6, 'Diseñador Textil', NOW(), NOW()),
-(7, 'Operario de Máquinas', NOW(), NOW()),
-(8, 'Contador', NOW(), NOW()),
-(9, 'Asistente Comercial', NOW(), NOW()),
-(10, 'Logística', NOW(), NOW());
-
--- Datos para users
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `branch_id`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Ana Martínez', 'admin@textilesdelnorte.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, 1, NULL, NOW(), NOW()),
-(2, 'Carlos Rojas', 'produccion@textilesdelnorte.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, 2, NULL, NOW(), NOW()),
-(3, 'Luisa Fernández', 'ventas@textilesdelnorte.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2, 5, NULL, NOW(), NOW()),
-(4, 'Pedro Gómez', 'almacen@textilesdelnorte.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 3, 4, NULL, NOW(), NOW()),
-(5, 'María López', 'diseno@textilesdelnorte.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, 6, NULL, NOW(), NOW()),
-(6, 'Jorge Ramírez', 'calidad@textilesdelnorte.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, 3, NULL, NOW(), NOW()),
-(7, 'Sofía Castro', 'operaciones@textilesdelnorte.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 4, 7, NULL, NOW(), NOW()),
-(8, 'Ricardo Mendoza', 'contabilidad@textilesdelnorte.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 5, 8, NULL, NOW(), NOW()),
-(9, 'Laura Torres', 'comercial@textilesdelnorte.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2, 9, NULL, NOW(), NOW()),
-(10, 'Diego Herrera', 'logistica@textilesdelnorte.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 6, 10, NULL, NOW(), NOW());
-
--- Datos para categories
 INSERT INTO `categories` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Telas de Algodón', 1, NOW(), NOW()),
-(2, 'Telas de Poliéster', 1, NOW(), NOW()),
-(3, 'Telas Mezcladas', 1, NOW(), NOW()),
-(4, 'Telas Estampadas', 1, NOW(), NOW()),
-(5, 'Telas Teñidas', 1, NOW(), NOW()),
-(6, 'Telas Ecológicas', 1, NOW(), NOW()),
-(7, 'Telas para Uniformes', 1, NOW(), NOW()),
-(8, 'Telas para Decoración', 1, NOW(), NOW()),
-(9, 'Telas Técnicas', 1, NOW(), NOW()),
-(10, 'Telas Artesanales', 1, NOW(), NOW());
+	(34, 'Rollos de Tela Acabada', 1, '2023-04-16 03:14:24', '2025-05-09 17:03:03'),
+	(50, 'Tela Confesionada', 1, '2023-04-16 03:16:23', '2025-05-09 17:41:03'),
+	(52, 'Rollos de Tela Teñida', 1, '2023-04-16 03:16:35', '2025-05-09 17:38:09'),
+	(55, 'Tela new', 1, '2025-05-14 17:15:17', '2025-05-14 17:15:17'),
+	(56, 'Marketing', 1, '2025-06-06 17:47:49', '2025-06-06 17:47:49');
 
--- Datos para products
-INSERT INTO `products` (`id`, `category_id`, `product_name`, `details`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Algodón Pima 200 hilos', 'Tela de algodón premium para camisas', 1, NOW(), NOW()),
-(2, 1, 'Algodón Orgánico 150 hilos', 'Tela ecológica sin químicos', 1, NOW(), NOW()),
-(3, 2, 'Poliéster Microfibra', 'Tela ligera y resistente', 1, NOW(), NOW()),
-(4, 3, 'Algodón/Poliéster 65/35', 'Mezcla ideal para uniformes', 1, NOW(), NOW()),
-(5, 4, 'Tela Estampada Floral', 'Diseños modernos para moda', 1, NOW(), NOW()),
-(6, 5, 'Denim Teñido Índigo', 'Para confección de jeans', 1, NOW(), NOW()),
-(7, 6, 'Tela Bambú', 'Material sostenible y suave', 1, NOW(), NOW()),
-(8, 7, 'Tela Oxford para Uniformes', 'Resistente y fácil de lavar', 1, NOW(), NOW()),
-(9, 8, 'Tela de Lino para Cortinas', 'Elegante y duradero', 1, NOW(), NOW()),
-(10, 9, 'Tela Impermeable', 'Para ropa técnica y deportiva', 1, NOW(), NOW());
+INSERT INTO `companies` (`id`, `name`, `phone`, `address`, `created_at`, `updated_at`) VALUES
+	(1, 'Inventario Sayrex', '972294409', 'Calle JOSE CARLOS MARIATEGUI Cuadra 2  ANCON Codigo Postal: 15123', NULL, '2025-05-08 20:41:13');
 
--- Datos para vendors
-INSERT INTO `vendors` (`id`, `name`, `phone`, `email`, `address`, `created_at`, `updated_at`) VALUES
-(1, 'Hilos y Telas S.A.', '555-100-1111', 'ventas@hilosytelas.com', 'Zona Industrial Textil 101, Ciudad', NOW(), NOW()),
-(2, 'Proveedora de Algodón', '555-200-2222', 'contacto@algodonpro.com', 'Calle Materia Prima 202, Ciudad', NOW(), NOW()),
-(3, 'Importadora Textil', '555-300-3333', 'pedidos@importex.com', 'Av. Proveedores 303, Ciudad', NOW(), NOW()),
-(4, 'Colorantes Nacionales', '555-400-4444', 'info@colorantes.com', 'Av. Tintes 404, Ciudad', NOW(), NOW()),
-(5, 'Maquinaria Textil', '555-500-5555', 'servicio@matextil.com', 'Calle Maquinaria 505, Ciudad', NOW(), NOW()),
-(6, 'Insumos para Teñido', '555-600-6666', 'ventas@insumostextiles.com', 'Av. Químicos 606, Ciudad', NOW(), NOW()),
-(7, 'Distribuidora de Telas', '555-700-7777', 'contacto@distritex.com', 'Calle Mayoristas 707, Ciudad', NOW(), NOW()),
-(8, 'Hilandería Moderna', '555-800-8888', 'info@hilanderiamoderna.com', 'Av. Hilados 808, Ciudad', NOW(), NOW()),
-(9, 'Tejeduría Industrial', '555-900-9999', 'ventas@tejeduriaindustrial.com', 'Calle Tejidos 909, Ciudad', NOW(), NOW()),
-(10, 'Eco Materiales', '555-000-1010', 'contacto@ecomateriales.com', 'Av. Sostenible 100, Ciudad', NOW(), NOW());
-
--- Datos para customers
 INSERT INTO `customers` (`id`, `customer_name`, `email`, `phone`, `address`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Boutique Elegante', 'contacto@boutiqueelegante.com', '555-111-1111', 'Calle Moda 456, Ciudad', 1, NOW(), NOW()),
-(2, 'Confecciones Rápidas', 'ventas@confeccionesrapidas.com', '555-222-2222', 'Av. Costura 123, Ciudad', 1, NOW(), NOW()),
-(3, 'Tienda de Telas', 'info@tiendadetelas.com', '555-333-3333', 'Calle Comercial 789, Ciudad', 1, NOW(), NOW()),
-(4, 'Moda Corporativa', 'pedidos@modacorporativa.com', '555-444-4444', 'Av. Oficinas 101, Ciudad', 1, NOW(), NOW()),
-(5, 'Uniformes Escolares', 'contacto@uniformescolares.com', '555-555-5555', 'Calle Educación 202, Ciudad', 1, NOW(), NOW()),
-(6, 'Decoración Hogar', 'ventas@decoracionhogar.com', '555-666-6666', 'Av. Diseño 303, Ciudad', 1, NOW(), NOW()),
-(7, 'Taller de Costura', 'info@tallercostura.com', '555-777-7777', 'Calle Artesanal 404, Ciudad', 1, NOW(), NOW()),
-(8, 'Exportadora Textil', 'contacto@exportadoratextil.com', '555-888-8888', 'Zona Franca 505, Ciudad', 1, NOW(), NOW()),
-(9, 'Mayorista de Ropa', 'pedidos@mayoristaropa.com', '555-999-9999', 'Av. Comercio 606, Ciudad', 1, NOW(), NOW()),
-(10, 'Diseñadores Asociados', 'info@disenadoresasociados.com', '555-000-0000', 'Calle Creatividad 707, Ciudad', 1, NOW(), NOW());
+	(37, 'Juan Pérez', 'juan.perez@example.com', '555-1234', 'Calle 1, Colonia Centro, Ciudad de México', 1, '2023-04-17 02:08:05', '2023-04-17 02:08:05'),
+	(38, 'María Rodríguez', 'maria.rodriguez@example.com', '555-5678', 'Calle 2, Colonia Condesa, Ciudad de México', 1, '2023-04-17 02:08:05', '2023-04-17 02:08:05'),
+	(39, 'Pedro García', 'pedro.garcia@example.com', '555-9876', 'Calle 3, Colonia Roma, Ciudad de México', 1, '2023-04-17 02:08:05', '2023-04-17 02:08:05'),
+	(40, 'Ana Hernández', 'ana.hernandez@gmail.com', '965786507', 'JR DANIEL ALCIDES CARRION Cuadra 2 Ancon', 1, '2023-04-17 02:08:05', '2025-05-08 19:38:40'),
+	(41, 'Jorge Martínez', 'jorge.martinez@example.com', '555-3691', 'Calle 5, Colonia Santa Fe, Ciudad de México', 1, '2023-04-17 02:08:05', '2023-04-17 02:08:05'),
+	(42, 'Laura González', 'laura.gonzalez@example.com', '555-5555', 'Calle 6, Colonia Polanco, Ciudad de México', 1, '2023-04-17 02:08:05', '2023-04-17 02:08:05'),
+	(43, 'Miguel Álvarez', 'miguel.alvarez@example.com', '555-7777', 'Calle 7, Colonia Juárez, Ciudad de México', 1, '2023-04-17 02:08:05', '2023-04-17 02:08:05'),
+	(44, 'Carmen Flores', 'carmen.flores@example.com', '555-1212', 'Calle 8, Colonia Coyoacán, Ciudad de México', 1, '2023-04-17 02:08:05', '2023-04-17 02:08:05'),
+	(45, 'José García', 'jose.garcia@example.com', '555-7777', 'Calle 9, Colonia Del Valle, Ciudad de México', 1, '2023-04-17 02:08:05', '2023-04-17 02:08:05'),
+	(46, 'Fernanda González', 'fernanda.gonzalez@example.com', '555-2345', 'Calle 10, Colonia San Ángel, Ciudad de México', 1, '2023-04-17 02:08:05', '2023-04-17 02:08:05'),
+	(47, 'Diego Torres', 'diego.torres@example.com', '555-4567', 'Calle 11, Colonia Santa María la Ribera, Ciudad de México', 1, '2023-04-17 02:08:05', '2023-04-17 02:08:05'),
+	(48, 'Carla Hernández', 'carla.hernandez@example.com', '555-1111', 'Calle 12, Colonia Tabacalera, Ciudad de México', 1, '2023-04-17 02:08:05', '2023-04-17 02:08:05'),
+	(49, 'Raúl Díaz', 'raul.diaz@example.com', '555-2222', 'Calle 13, Colonia Doctores, Ciudad de México', 1, '2023-04-17 02:08:05', '2023-04-17 02:08:05'),
+	(50, 'Sofía García', 'sofia.garcia@example.com', '555-3333', 'Calle 14, Colonia Lindavista, Ciudad de México', 1, '2023-04-17 02:08:05', '2023-04-17 02:08:05'),
+	(51, 'Héctor Jiménez', 'hector.jimenez@example.com', '555-4444', 'Calle 15, Colonia Vallejo, Ciudad de México', 1, '2023-04-17 02:08:05', '2023-04-17 02:08:05'),
+	(52, 'Diana Martínez', 'diana.martinez@example.com', '555-5555', 'Calle 16, Colonia Industrial, Ciudad de México', 1, '2023-04-17 02:08:05', '2023-04-17 02:08:05'),
+	(53, 'Cristian', '1234@gmail.com', '999999999', 'Av comun.sda', 1, '2025-05-09 17:20:59', '2025-05-09 17:20:59'),
+	(54, 'Gomez', 'pedrocor@gmail.com', '987879231', 'Av arequipa cuadra 2', 1, '2025-05-14 17:12:23', '2025-05-14 17:12:48'),
+	(55, 'Richard', 'richardnovinoaclases@gmail.com', '931212138', 'Av San juan de lirugancho', 1, '2025-06-06 17:42:49', '2025-06-06 17:47:10');
 
--- Datos para stocks
-INSERT INTO `stocks` (`id`, `category_id`, `product_code`, `product_id`, `vendor_id`, `user_id`, `chalan_no`, `buying_price`, `selling_price`, `discount`, `stock_quantity`, `current_quantity`, `note`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'TEL-ALG-001', 1, 1, 1, 'CH-TXT-2023-001', 8.50, 12.99, 0, 100, 100, 'Stock inicial', 1, NOW(), NOW()),
-(2, 1, 'TEL-ALG-002', 2, 2, 1, 'CH-TXT-2023-002', 9.75, 14.50, 0, 150, 150, 'Stock inicial', 1, NOW(), NOW()),
-(3, 2, 'TEL-POL-001', 3, 3, 1, 'CH-TXT-2023-003', 6.25, 9.99, 0, 200, 200, 'Stock inicial', 1, NOW(), NOW()),
-(4, 3, 'TEL-MEZ-001', 4, 4, 1, 'CH-TXT-2023-004', 7.80, 11.50, 0, 120, 120, 'Stock inicial', 1, NOW(), NOW()),
-(5, 4, 'TEL-EST-001', 5, 5, 1, 'CH-TXT-2023-005', 10.20, 15.75, 0, 80, 80, 'Stock inicial', 1, NOW(), NOW()),
-(6, 5, 'TEL-TEN-001', 6, 6, 1, 'CH-TXT-2023-006', 12.50, 18.99, 0, 90, 90, 'Stock inicial', 1, NOW(), NOW()),
-(7, 6, 'TEL-ECO-001', 7, 7, 1, 'CH-TXT-2023-007', 15.00, 22.50, 0, 70, 70, 'Stock inicial', 1, NOW(), NOW()),
-(8, 7, 'TEL-UNI-001', 8, 8, 1, 'CH-TXT-2023-008', 9.30, 13.99, 0, 110, 110, 'Stock inicial', 1, NOW(), NOW()),
-(9, 8, 'TEL-DEC-001', 9, 9, 1, 'CH-TXT-2023-009', 11.75, 17.25, 0, 95, 95, 'Stock inicial', 1, NOW(), NOW()),
-(10, 9, 'TEL-TEC-001', 10, 10, 1, 'CH-TXT-2023-010', 14.20, 21.50, 0, 85, 85, 'Stock inicial', 1, NOW(), NOW());
+INSERT INTO `menus` (`id`, `parent_id`, `name`, `icon`, `menu_url`, `status`, `created_at`, `updated_at`) VALUES
+	(1, 0, 'Clientes', 'contacts', 'customer.index', 0, '2020-07-29 13:17:51', '2020-07-29 13:17:56'),
+	(2, 0, 'Gestión de Productos', 'category', NULL, 0, '2020-07-29 13:17:53', '2020-07-29 13:17:54'),
+	(3, 0, 'Gestión de Existencias', 'assignment', NULL, 0, '2020-07-29 13:17:52', '2020-07-29 13:17:54'),
+	(4, 0, 'Gestión de usuarios', 'supervised_user_circle', NULL, 0, '2020-07-29 13:17:51', '2020-07-29 13:17:56'),
+	(5, 0, 'Reportes', 'receipt_long', 'report.index', 0, '2020-07-29 13:17:52', '2020-07-29 13:17:55'),
+	(6, 0, 'Configuración', 'settings', NULL, 0, '2020-07-29 13:17:58', '2020-07-29 13:17:57'),
+	(7, 2, 'Categorias', NULL, 'category.index', 0, '2020-07-29 13:17:50', '2020-07-29 13:17:57'),
+	(8, 2, 'Productos', NULL, 'product.index', 0, '2020-07-29 13:17:49', '2020-07-29 13:17:59'),
+	(9, 2, 'Proveedores', NULL, 'supplier.index', 0, '2020-07-29 13:17:49', '2020-07-29 13:18:00'),
+	(10, 3, 'Entradas', NULL, 'stock.index', 0, '2020-07-29 13:17:48', '2020-07-29 13:18:00'),
+	(11, 3, 'Salidas / Facturación', NULL, 'invoice.index', 0, '2020-07-29 13:17:47', '2020-07-29 13:18:01'),
+	(12, 4, 'Gestión de roles', NULL, 'role.index', 0, '2020-07-29 13:17:46', '2020-07-29 13:17:46'),
+	(13, 4, 'Usuarios', NULL, 'user.index', 0, '2020-07-29 13:17:44', '2020-07-29 13:17:44'),
+	(14, 6, 'Información de la empresa', NULL, 'company.index', 0, '2020-07-29 13:17:43', '2020-07-29 13:17:45'),
+	(15, 6, 'Cambiar la contraseña', NULL, 'password.index', 0, '2020-07-29 13:17:42', '2020-07-29 13:16:37');
 
--- Datos para sells
-INSERT INTO `sells` (`id`, `user_id`, `customer_id`, `branch_id`, `total_amount`, `paid_amount`, `sell_date`, `discount_amount`, `payment_method`, `payment_status`, `created_at`, `updated_at`) VALUES
-(1, 3, 1, 2, 389.70, 389.70, '2023-06-10', 0, 1, 1, NOW(), NOW()),
-(2, 3, 2, 2, 525.00, 300.00, '2023-06-11', 0, 2, 0, NOW(), NOW()),
-(3, 3, 3, 2, 450.25, 450.25, '2023-06-12', 0, 1, 1, NOW(), NOW()),
-(4, 3, 4, 2, 320.50, 320.50, '2023-06-13', 0, 1, 1, NOW(), NOW()),
-(5, 3, 5, 2, 280.75, 150.00, '2023-06-14', 0, 2, 0, NOW(), NOW()),
-(6, 3, 6, 2, 410.20, 410.20, '2023-06-15', 0, 1, 1, NOW(), NOW()),
-(7, 3, 7, 2, 365.90, 365.90, '2023-06-16', 0, 1, 1, NOW(), NOW()),
-(8, 3, 8, 2, 295.60, 150.00, '2023-06-17', 0, 2, 0, NOW(), NOW()),
-(9, 3, 9, 2, 480.30, 480.30, '2023-06-18', 0, 1, 1, NOW(), NOW()),
-(10, 3, 10, 2, 340.80, 340.80, '2023-06-19', 0, 1, 1, NOW(), NOW());
-
--- Datos para sell_details
-INSERT INTO `sell_details` (`id`, `stock_id`, `sell_id`, `product_id`, `category_id`, `vendor_id`, `user_id`, `chalan_no`, `selling_date`, `customer_id`, `sold_quantity`, `buy_price`, `sold_price`, `total_buy_price`, `total_sold_price`, `discount`, `discount_type`, `discount_amount`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 1, 1, 3, 'CH-TXT-2023-001', '2023-06-10', '1', 10, 8.50, 12.99, 85.00, 129.90, 0, 0, 0, NOW(), NOW()),
-(2, 2, 1, 2, 1, 2, 3, 'CH-TXT-2023-002', '2023-06-10', '1', 5, 9.75, 14.50, 48.75, 72.50, 0, 0, 0, NOW(), NOW()),
-(3, 3, 2, 3, 2, 3, 3, 'CH-TXT-2023-003', '2023-06-11', '2', 20, 6.25, 9.99, 125.00, 199.80, 0, 0, 0, NOW(), NOW()),
-(4, 4, 2, 4, 3, 4, 3, 'CH-TXT-2023-004', '2023-06-11', '2', 15, 7.80, 11.50, 117.00, 172.50, 0, 0, 0, NOW(), NOW()),
-(5, 5, 3, 5, 4, 5, 3, 'CH-TXT-2023-005', '2023-06-12', '3', 8, 10.20, 15.75, 81.60, 126.00, 0, 0, 0, NOW(), NOW()),
-(6, 6, 4, 6, 5, 6, 3, 'CH-TXT-2023-006', '2023-06-13', '4', 10, 12.50, 18.99, 125.00, 189.90, 0, 0, 0, NOW(), NOW()),
-(7, 7, 5, 7, 6, 7, 3, 'CH-TXT-2023-007', '2023-06-14', '5', 7, 15.00, 22.50, 105.00, 157.50, 0, 0, 0, NOW(), NOW()),
-(8, 8, 6, 8, 7, 8, 3, 'CH-TXT-2023-008', '2023-06-15', '6', 12, 9.30, 13.99, 111.60, 167.88, 0, 0, 0, NOW(), NOW()),
-(9, 9, 7, 9, 8, 9, 3, 'CH-TXT-2023-009', '2023-06-16', '7', 9, 11.75, 17.25, 105.75, 155.25, 0, 0, 0, NOW(), NOW()),
-(10, 10, 8, 10, 9, 10, 3, 'CH-TXT-2023-010', '2023-06-17', '8', 8, 14.20, 21.50, 113.60, 172.00, 0, 0, 0, NOW(), NOW());
-
--- Datos para payments
-INSERT INTO `payments` (`id`, `sell_id`, `customer_id`, `user_id`, `date`, `paid_in`, `bank_information`, `amount`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 3, '2023-06-10', 'Efectivo', NULL, 389.70, NOW(), NOW()),
-(2, 2, 2, 3, '2023-06-11', 'Transferencia', 'Banco Textil, Ref: TXT-987654', 300.00, NOW(), NOW()),
-(3, 3, 3, 3, '2023-06-12', 'Efectivo', NULL, 450.25, NOW(), NOW()),
-(4, 4, 4, 3, '2023-06-13', 'Efectivo', NULL, 320.50, NOW(), NOW()),
-(5, 5, 5, 3, '2023-06-14', 'Transferencia', 'Banco Textil, Ref: TXT-987655', 150.00, NOW(), NOW()),
-(6, 6, 6, 3, '2023-06-15', 'Efectivo', NULL, 410.20, NOW(), NOW()),
-(7, 7, 7, 3, '2023-06-16', 'Efectivo', NULL, 365.90, NOW(), NOW()),
-(8, 8, 8, 3, '2023-06-17', 'Transferencia', 'Banco Textil, Ref: TXT-987656', 150.00, NOW(), NOW()),
-(9, 9, 9, 3, '2023-06-18', 'Efectivo', NULL, 480.30, NOW(), NOW()),
-(10, 10, 10, 3, '2023-06-19', 'Efectivo', NULL, 340.80, NOW(), NOW());
-
--- Datos para migrations (ejemplo básico)
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2018_12_10_051212_create_products_table', 2),
-(4, '2018_12_10_052440_create_vendors_table', 2),
-(5, '2018_12_10_052501_create_customers_table', 2),
-(6, '2018_12_10_052521_create_stocks_table', 2),
-(7, '2018_12_10_052610_create_sells_table', 2),
-(8, '2018_12_10_052631_create_sell_details_table', 2),
-(9, '2018_12_10_075236_create_branches_table', 2),
-(10, '2018_12_31_160432_create_categories_table', 3);
+	(1, '2014_10_12_000000_create_users_table', 1),
+	(2, '2014_10_12_100000_create_password_resets_table', 1),
+	(3, '2018_12_10_051212_create_products_table', 2),
+	(4, '2018_12_10_052440_create_vendors_table', 2),
+	(5, '2018_12_10_052501_create_customers_table', 2),
+	(6, '2018_12_10_052521_create_stocks_table', 2),
+	(7, '2018_12_10_052610_create_sells_table', 2),
+	(8, '2018_12_10_052631_create_sell_details_table', 2),
+	(9, '2018_12_10_075236_create_branches_table', 2),
+	(10, '2018_12_31_160432_create_categories_table', 3),
+	(11, '2019_01_12_163604_create_payments_table', 4),
+	(12, '2019_01_19_152250_biye--tabl', 5),
+	(13, '2019_02_10_113651_create_roles_table', 6),
+	(14, '2019_02_10_114632_create_permissions_table', 6),
+	(15, '2019_02_10_114735_create_menus_table', 6),
+	(16, '2019_02_14_130126_create_companies_table', 7);
+
+INSERT INTO `permissions` (`id`, `role_id`, `menu_id`, `created_at`, `updated_at`) VALUES
+	(124, 5, 1, '2019-02-23 00:54:16', '2019-02-23 00:54:16'),
+	(125, 5, 2, '2019-02-23 00:54:16', '2019-02-23 00:54:16'),
+	(126, 5, 3, '2019-02-23 00:54:16', '2019-02-23 00:54:16'),
+	(127, 5, 4, '2019-02-23 00:54:16', '2019-02-23 00:54:16'),
+	(128, 5, 5, '2019-02-23 00:54:16', '2019-02-23 00:54:16'),
+	(129, 5, 6, '2019-02-23 00:54:16', '2019-02-23 00:54:16'),
+	(130, 5, 9, '2019-02-23 00:54:16', '2019-02-23 00:54:16'),
+	(131, 5, 8, '2019-02-23 00:54:16', '2019-02-23 00:54:16'),
+	(132, 5, 7, '2019-02-23 00:54:16', '2019-02-23 00:54:16'),
+	(133, 5, 10, '2019-02-23 00:54:16', '2019-02-23 00:54:16'),
+	(134, 5, 11, '2019-02-23 00:54:16', '2019-02-23 00:54:16'),
+	(135, 5, 12, '2019-02-23 00:54:16', '2019-02-23 00:54:16'),
+	(136, 5, 15, '2019-02-23 00:54:16', '2019-02-23 00:54:16'),
+	(137, 6, 1, '2019-02-23 03:25:01', '2019-02-23 03:25:01'),
+	(138, 6, 3, '2019-02-23 03:25:01', '2019-02-23 03:25:01'),
+	(139, 6, 6, '2019-02-23 03:25:01', '2019-02-23 03:25:01'),
+	(140, 6, 15, '2019-02-23 03:25:01', '2019-02-23 03:25:01'),
+	(706, 4, 11, '2020-07-31 17:30:54', '2020-07-31 17:30:54'),
+	(707, 4, 2, '2020-07-31 17:30:54', '2020-07-31 17:30:54'),
+	(708, 4, 4, '2020-07-31 17:30:54', '2020-07-31 17:30:54'),
+	(709, 4, 15, '2020-07-31 17:30:54', '2020-07-31 17:30:54'),
+	(710, 4, 6, '2020-07-31 17:30:54', '2020-07-31 17:30:54'),
+	(721, 3, 1, '2020-11-17 17:03:42', '2020-11-17 17:03:42'),
+	(722, 3, 9, '2020-11-17 17:03:42', '2020-11-17 17:03:42'),
+	(723, 3, 8, '2020-11-17 17:03:42', '2020-11-17 17:03:42'),
+	(724, 3, 7, '2020-11-17 17:03:42', '2020-11-17 17:03:42'),
+	(725, 3, 2, '2020-11-17 17:03:42', '2020-11-17 17:03:42'),
+	(726, 3, 10, '2020-11-17 17:03:42', '2020-11-17 17:03:42'),
+	(727, 3, 11, '2020-11-17 17:03:42', '2020-11-17 17:03:42'),
+	(728, 3, 3, '2020-11-17 17:03:42', '2020-11-17 17:03:42'),
+	(729, 2, 1, '2021-07-05 20:00:38', '2021-07-05 20:00:38'),
+	(730, 2, 9, '2021-07-05 20:00:38', '2021-07-05 20:00:38'),
+	(731, 2, 8, '2021-07-05 20:00:38', '2021-07-05 20:00:38'),
+	(732, 2, 7, '2021-07-05 20:00:38', '2021-07-05 20:00:38'),
+	(733, 2, 2, '2021-07-05 20:00:38', '2021-07-05 20:00:38'),
+	(734, 2, 10, '2021-07-05 20:00:38', '2021-07-05 20:00:38'),
+	(735, 2, 11, '2021-07-05 20:00:38', '2021-07-05 20:00:38'),
+	(736, 2, 3, '2021-07-05 20:00:38', '2021-07-05 20:00:38'),
+	(737, 2, 12, '2021-07-05 20:00:38', '2021-07-05 20:00:38'),
+	(738, 2, 13, '2021-07-05 20:00:38', '2021-07-05 20:00:38'),
+	(739, 2, 4, '2021-07-05 20:00:38', '2021-07-05 20:00:38'),
+	(740, 2, 5, '2021-07-05 20:00:38', '2021-07-05 20:00:38'),
+	(741, 2, 14, '2021-07-05 20:00:38', '2021-07-05 20:00:38'),
+	(742, 2, 15, '2021-07-05 20:00:38', '2021-07-05 20:00:38'),
+	(743, 2, 6, '2021-07-05 20:00:38', '2021-07-05 20:00:38'),
+	(744, 13, 1, '2025-05-14 17:11:35', '2025-05-14 17:11:35'),
+	(745, 13, 7, '2025-05-14 17:11:35', '2025-05-14 17:11:35'),
+	(746, 13, 8, '2025-05-14 17:11:35', '2025-05-14 17:11:35'),
+	(747, 13, 9, '2025-05-14 17:11:35', '2025-05-14 17:11:35'),
+	(748, 13, 2, '2025-05-14 17:11:35', '2025-05-14 17:11:35');
+
+INSERT INTO `products` (`id`, `category_id`, `product_name`, `details`, `status`, `created_at`, `updated_at`) VALUES
+	(30, 34, 'Arroz blanco de grano largo', 'Este arroz es conocido por su textura suave y delicada, y es ideal para preparar una gran variedad de platos, desde arroz con frijoles hasta sushi. El arroz blanco de grano largo es una excelente fuente de carbohidratos y se puede cocinar fácilmente en una olla de arroz o en una cacerola.', 1, '2023-04-16 03:18:28', '2023-04-16 05:54:34'),
+	(31, 34, 'Frijoles negros envasados al vacío', 'Estos frijoles son una excelente fuente de proteínas y fibra, y son un ingrediente popular en muchos platos tradicionales de la cocina latinoamericana, como los frijoles refritos y el chili con carne. Los frijoles negros envasados al vacío son fáciles de almacenar y se pueden preparar en pocos minutos.', 1, '2023-04-16 03:18:43', '2023-04-16 05:54:52'),
+	(32, 34, 'Espagueti de trigo', 'El espagueti es un tipo de pasta larga y delgada que se puede combinar con una gran variedad de salsas y acompañamientos. El espagueti de trigo es una opción saludable y nutritiva, ya que es bajo en grasa y alto en carbohidratos complejos. Además, es fácil de cocinar y se puede preparar en pocos minutos.', 1, '2023-04-16 03:18:59', '2023-04-16 05:55:07'),
+	(33, 34, 'Tela acabada', 'La tela es super refinada', 1, '2023-04-16 03:28:19', '2025-05-09 17:30:24'),
+	(49, 34, 'Cereal de maíz en hojuelas', 'El cereal de maíz en hojuelas es un desayuno clásico que se puede disfrutar en cualquier momento del día. Es un alimento bajo en grasas y azúcares, y una buena fuente de carbohidratos y fibra. Además, es fácil de almacenar y se puede combinar con leche, yogur o frutas para un desayuno completo y saludable.', 1, '2023-04-16 04:07:59', '2023-04-16 05:55:43'),
+	(50, 52, 'Mesa de jardín de madera', 'Mesa de jardín de alta calidad con acabado resistente a la intemperie', 1, '2023-04-16 03:18:28', '2023-04-16 03:18:28'),
+	(51, 52, 'Set de utensilios de cocina de acero inoxidable', 'Set de utensilios de cocina duradero con mangos ergonómicos', 1, '2023-04-16 03:18:28', '2023-04-16 03:18:28'),
+	(52, 52, 'Juego de sábanas de algodón', 'Juego de sábanas de algodón suave y cómodo para un descanso reparador', 1, '2023-04-16 03:18:28', '2023-04-16 03:18:28'),
+	(54, 52, 'Tela con diseños print', 'Aspiradora inalámbrica con batería recargable y accesorios para limpiar la casa', 1, '2023-04-16 03:18:28', '2025-05-14 17:07:32'),
+	(58, 52, 'Macetas de cerámica para plantas', 'Macetas de cerámica elegantes y modernas para plantas de interior y exterior', 1, '2023-04-16 03:18:28', '2023-04-16 03:18:28'),
+	(236, 52, 'Tela de color palo rosa', 'Tela teñida con tintes naturales', 1, '2025-05-14 17:14:19', '2025-05-14 17:14:55');
+
+INSERT INTO `roles` (`id`, `role_name`, `created_at`, `updated_at`) VALUES
+	(2, 'Superadministrador', '2019-02-12 03:59:54', '2023-04-17 04:53:28'),
+	(3, 'Gerente', '2019-02-13 00:07:41', '2023-04-17 04:35:56'),
+	(5, 'Almacenero', '2019-02-13 05:53:15', '2025-05-08 21:36:42');
+
+INSERT INTO `stocks` (`id`, `category_id`, `product_code`, `product_id`, `vendor_id`, `user_id`, `chalan_no`, `buying_price`, `selling_price`, `discount`, `stock_quantity`, `current_quantity`, `note`, `status`, `created_at`, `updated_at`) VALUES
+	(55, 34, '1681681567', 30, 81, 12, '2023-04-16', 9.8, 12.5, 0, 100, 100, NULL, 1, '2023-04-16 22:46:07', '2025-05-09 17:01:18'),
+	(56, 37, '1681705778', 67, 81, 12, '2023-04-16', 189.99, 249.99, 0, 48, 48, NULL, 1, '2023-04-17 05:29:38', '2023-04-17 05:29:38'),
+	(57, 34, '1747242963', 33, 88, 12, '2025-05-14', 123, 150, 0, 23, 23, 'Compra realizada por falta de stock', 1, '2025-05-14 17:16:03', '2025-05-14 17:16:03');
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `branch_id`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
+	(12, 'Cristhian', 'Supremegold@gmail.com', '$2y$10$W/nqTuN0X.JaGtGBkpw01OTSL0I3aShYL9QusP8Q5kIZ2AviqQHKC', 1, 2, 'woRb8grnH3v0g7Ih14TVhIuGk8PpWUapsNJQQHu1FcF7tQ9ZJaPzZkaj1wYg', '2020-07-31 17:27:25', '2025-05-14 16:53:29'),
+	(21, 'Richard', 'oliveriman255@gmail.com', '$2y$10$r5bHnsp1d6MqyL8J2K91MetOiN.9yrmb0SP36rnQdnpxJonsuLStO', 1, 3, 'hAN82Syp4WsHAuCH7qAKGesXtSd1NIMcdVY9W5aAG6wHWZYq0jgIL5RZ8RZD', '2025-05-09 17:19:58', '2025-05-09 17:20:06'),
+	(22, 'User', 'usertesting@gmail.com', '$2y$10$9Xzcw2IJJJHnxrzkqEQsQ.Fem67NvjEjKnmiPSsh0azw08MWyDoES', 1, 13, 'oLwr0SHd7qBXqVrsn5hLYG2lhExlXEJpGakZottqrPja5hHdROsb5D5J8gbD', '2025-05-14 17:09:58', '2025-05-14 17:09:58');
+
+INSERT INTO `vendors` (`id`, `name`, `phone`, `email`, `address`, `created_at`, `updated_at`) VALUES
+	(76, 'La Michoacana', '55-1234-5678', 'contacto@lamichoacana.com.mx', 'Av. Insurgentes Sur 1647, Col. San José Insurgentes, CDMX', '2023-04-16 21:44:30', '2023-04-16 21:44:30'),
+	(77, 'El Paraiso del Helado', '55-8765-4321', 'info@elparaisodelhelado.com.mx', 'Calle Gral. Emiliano Zapata 54, Col. San Francisco Chilpan, CDMX', '2023-04-16 21:44:30', '2023-04-16 21:44:30'),
+	(78, 'La Flor de Michoacán', '33-3333-3333', 'ventas@laflordemichoacan.com.mx', 'Calle Sinaloa 1437, Col. Providencia, Guadalajara, Jalisco', '2023-04-16 21:44:30', '2023-04-16 21:44:30'),
+	(79, 'Paletería la Victoria', '81-1111-1111', 'contacto@paleterialavictoria.com.mx', 'Av. Chapultepec Sur 177, Col. Americana, Monterrey, Nuevo León', '2023-04-16 21:44:30', '2023-04-16 21:44:30'),
+	(80, 'Helados Santa Clara', '55-5555-5555', 'contacto@santaclara.com.mx', 'Av. de los Insurgentes Sur 1395, Col. Insurgentes Mixcoac, CDMX', '2023-04-16 21:44:30', '2023-04-16 21:44:30'),
+	(81, 'La Imperial', '33-2222-2222', 'info@laimperial.com.mx', 'Av. México 2500, Col. Ladrón de Guevara, Guadalajara, Jalisco', '2023-04-16 21:44:30', '2023-04-16 21:44:30'),
+	(82, 'Helados Holanda', '55-9876-5432', 'contacto@heladosholanda.com.mx', 'Av. Revolución 1928, Col. San Ángel, CDMX', '2023-04-16 21:44:30', '2023-04-16 21:44:30'),
+	(83, 'Nieve Garrafa', '55-1111-2222', 'ventas@nievegarrafa.com.mx', 'Av. Toluca 124, Col. Olivar de los Padres, CDMX', '2023-04-16 21:44:30', '2023-04-16 21:44:30'),
+	(84, 'La Tapatía Helados', '33-4444-4444', 'contacto@latapatiahelados.com.mx', 'Calle Francisco Javier Mina 20, Col. Centro, Guadalajara, Jalisco', '2023-04-16 21:44:30', '2023-04-16 21:44:30'),
+	(85, 'La Tradicional', '81-2222-2222', 'info@latradicional.com.mx', 'Calle Padre Mier 1241, Col. Centro, Monterrey, Nuevo León', '2023-04-16 21:44:30', '2023-04-16 21:44:30'),
+	(88, 'Gonzales', '978523456', 'gonzales@gmail.com', 'Av tacna cuadra3', '2025-05-14 17:13:33', '2025-05-14 17:13:48');
